@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full fixed top-0 h-14 shadow-md bg-white">
+  <div class="w-full fixed top-0 h-14 shadow-md bg-white z-50">
     <div class="container mx-auto px-3 flex items-center h-full">
       <div id="logo" class="w-40">
         <img src="~/assets/images/instagram.png" alt="" />
