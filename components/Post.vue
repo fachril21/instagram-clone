@@ -30,7 +30,7 @@
       </div>
     </div>
 
-    <div id="image" class="w-full h-auto">
+    <div id="image" class="w-full h-auto" @click="like">
       <img
         class="h-auto"
         :src="require('~/assets/images/' + post.image)"
@@ -80,6 +80,30 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      counter: 0,
+    };
+  },
+  methods: {
+    like() {
+      this.counter++;
+
+      if (this.counter == 1) {
+        this.timer = setTimeout(() => {
+          this.counter = 0;
+          console.log("move page");
+        }, 300);
+
+        return;
+      }
+
+      clearTimeout(this.timer);
+      this.counter = 0;
+      // this.likeThePost(postId);
+      console.log("liked post " + this.post.id);
+    },
+  },
   mounted() {},
   computed: {
     time() {
@@ -98,15 +122,11 @@ export default {
       } else if (elapsed < msPerDay) {
         return Math.round(elapsed / msPerHour) + " hours ago";
       } else if (elapsed < msPerMonth) {
-        return "approximately " + Math.round(elapsed / msPerDay) + " days ago";
+        return Math.round(elapsed / msPerDay) + " days ago";
       } else if (elapsed < msPerYear) {
-        return (
-          "approximately " + Math.round(elapsed / msPerMonth) + " months ago"
-        );
+        return Math.round(elapsed / msPerMonth) + " months ago";
       } else {
-        return (
-          "approximately " + Math.round(elapsed / msPerYear) + " years ago"
-        );
+        return Math.round(elapsed / msPerYear) + " years ago";
       }
     },
   },
